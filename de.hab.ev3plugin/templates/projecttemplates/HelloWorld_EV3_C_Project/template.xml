@@ -16,7 +16,7 @@
 
 		<property id="uploadDir" label="%EV3Project.uploadDir.label"
 			description="%EV3Project.uploadDir.description" type="select"
-			pattern=".*" default="${card}" hidden="false" persist="true">
+			pattern=".*" default="${brick}" hidden="false" persist="true">
 			<item value="${card}" label="SD-Card">
 			</item>
 			<item value="${brick}" label="Brick Internal Storage">

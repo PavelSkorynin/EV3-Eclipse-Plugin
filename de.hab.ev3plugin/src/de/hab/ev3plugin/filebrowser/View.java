@@ -43,7 +43,7 @@ public class View extends ViewPart {
 	private static final String[] whiteList = {
 		"/media/card",
 		"/media/usb",
-		"/home/root/lms2012/BrkProg_SAVE",
+		"/home/root/lms2012/prjs",
 		"/home/root/lms2012/BrkProg_DL",
 		};
 

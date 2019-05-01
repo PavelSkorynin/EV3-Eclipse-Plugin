@@ -1,6 +1,6 @@
 // Most common paths: ${card}, ${brick} and ${usb}
-define starter '$(uploadDir)/myapps/${projectName}.rbf'
-define elfexec '$(uploadDir)/${projectName}.elf'
+define starter '$(uploadDir)/${projectName}/${projectName}.rbf'
+define elfexec '$(uploadDir)/${projectName}/${projectName}.elf'
 
 // stolen from http://www.robotnav.com/run-programs-without-network/
 vmthread MAIN
@@ -15,4 +15,4 @@ vmthread MAIN
 // ${projectName} 	= Current name of the project
 // ${card}   		= /media/card
 // ${usb}  			= /media/usb
-// ${brick} 		= /home/root/lms2012/prjs/BrkProg_SAVE
+// ${brick} 		= /home/root/lms2012/prjs

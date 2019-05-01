@@ -2357,7 +2357,7 @@
             </enablement>
          </option>
          <!-- ev3 specific -->
-          <option
+         <option
                browseType="directory"
                category="ilg.gnuarmeclipse.managedbuild.cross.optionCategory.target"
                id="ilg.gnuarmeclipse.managedbuild.cross.option.toolchain.uploader"

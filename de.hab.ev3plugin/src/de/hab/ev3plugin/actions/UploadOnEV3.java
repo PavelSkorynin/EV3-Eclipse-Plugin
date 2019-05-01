@@ -140,7 +140,7 @@ public class UploadOnEV3 implements IWorkbenchWindowActionDelegate {
                     map.put("${projectName}", projectName);
                     map.put("${card}", "/media/card");
                     map.put("${usb}", "/media/usb");
-                    map.put("${brick}", "/home/root/lms2012/prjs/BrkProg_SAVE");
+                    map.put("${brick}", "/home/root/lms2012/prjs");
                     dialog.log("Preprocessing start.lms");
                     Preprocessor pp = new Preprocessor(projectRoot + "/start.lms");
                     String temp_starter = IO.removeExtension(pp.run(map).getAbsolutePath());
