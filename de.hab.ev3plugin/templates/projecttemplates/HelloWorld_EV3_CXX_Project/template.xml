@@ -2,7 +2,7 @@
 <template type="ProjTempl" version="1.0" supplier="Eclipse.org"
 	revision="1.0" author="Ahmad Fatoum"
 	copyright="Copyright (c) 2015 Hochschule Aschaffenburg. All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html"
-	id="HelloARMWorld_CPP_Project" label="%HelloWorld.CCtemplate.label"
+	id="HelloWorld_EV3_CXX_Project" label="%HelloWorld.CCtemplate.label"
 	description="%HelloWorld.CCtemplate.description" help="help.html">
 	<!-- based on a template by Bala Torati (Symbian). Copyright (c) 2007 Symbian 
 		Software Limited and others. -->
@@ -57,7 +57,7 @@
 				<simple name="id"
 					value="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths" />
 				<simple-array name="values">
-					<element value="$(apiDir)" />
+					<element value="$(apiDir)/include" />
 				</simple-array>
 				<simple name="path" value="" />
 			</element>
@@ -65,7 +65,7 @@
 				<simple name="id"
 					value="ilg.gnuarmeclipse.managedbuild.cross.option.*.compiler.include.paths" />
 				<simple-array name="values">
-					<element value="$(apiDir)" />
+					<element value="$(apiDir)/include" />
 				</simple-array>
 				<simple name="path" value="" />
 			</element>
@@ -99,7 +99,7 @@
 				<simple name="id"
 					value="ilg.gnuarmeclipse.managedbuild.cross.option.*.linker.paths" />
 				<simple-array name="values">
-					<element value="$(apiDir)" />
+					<element value="$(apiDir)/lib" />
 				</simple-array>
 				<simple name="path" value="" />
 			</element>
@@ -133,6 +133,12 @@
 				<simple name="value" value="-static-libstdc++" />
 				<simple name="path" value="" />
 			</element>
+			<element>
+				<simple name="id"
+					value="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.otheroptimizations" />
+				<simple name="value" value="-std=c++17" />
+				<simple name="path" value="" />
+			</element>			
 		</complex-array>
 	</process>
 

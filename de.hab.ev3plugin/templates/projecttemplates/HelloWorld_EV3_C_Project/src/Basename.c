@@ -5,7 +5,7 @@
  \brief		Simple Hello World! for the Ev3
 */
 
-#include <ev3.h>
+#include <core/ev3.h>
 
 int main(void)
 {

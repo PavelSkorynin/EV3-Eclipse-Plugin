@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <template type="ProjTempl" version="1.0" supplier="Eclipse.org"
-	revision="1.0" author="Ahmad Fatoum"
-	copyright="Copyright (c) 2015 Hochschule Aschaffenburg. All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html"
-	id="HelloWorld_EV3_C_Project" label="%HelloWorld.Ctemplate.label"
-	description="%HelloWorld.Ctemplate.description" help="help.html">
+	revision="1.0" author="Pavel Skorynin"
+	copyright="Copyright (c) 2019"
+	id="Modern_EV3_CXX_Project" label="%ModernEV3.CCtemplate.label"
+	description="%ModernEV3.CCtemplate.description" help="help.html">
 	<!-- based on a template by Bala Torati (Symbian). Copyright (c) 2007 Symbian 
 		Software Limited and others. -->
 
-	<property-group id="basics" label="%HelloWorld.basics.label"
-		description="%HelloWorld.basics.description" type="PAGES-ONLY" help="help.html">
+	<property-group id="basics" label="%ModernEV3.basics.label"
+		description="%ModernEV3.basics.description" type="PAGES-ONLY" help="help.html">
 		<property id="apiDir" label="%EV3Project.apiDir.label"
 			description="%EV3Project.apiDir.description" type="browsedir"
 			pattern=".*" default="%EV3Project.apiDir.default" hidden="false"
@@ -24,24 +24,26 @@
 			<item value="${usb}" label="Usb Stick">
 			</item>
 		</property>
-		<property id="sourceDir" label="%HelloWorld.sourceDir.label"
-			description="%HelloWorld.sourceDir.description" type="input"
-			default="%HelloWorld.sourceDir.default" pattern="[a-zA-Z0-9]+"
+		<property id="sourceDir" label="%ModernEV3.sourceDir.label"
+			description="%ModernEV3.sourceDir.description" type="input"
+			default="%ModernEV3.sourceDir.default" pattern="[a-zA-Z0-9]+"
 			mandatory="false" persist="true" />
 
 	</property-group>
+	
 
 	<process type="org.eclipse.cdt.managedbuilder.core.NewManagedProject">
 		<simple name="name" value="$(projectName)" />
 		<simple name="artifactExtension" value="" />
-		<simple name="isCProject" value="true" />
+		<simple name="isCProject" value="false" />
 	</process>
+
 	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSBooleanOptionValue">
 		<simple name="projectName" value="$(projectName)" />
 		<complex-array name="resourcePaths">
 			<element>
 				<simple name="id"
-					value="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.strip" />
+					value="ilg.gnuarmeclipse.managedbuild.cross.option.*.linker.strip" />
 				<simple name="value" value="true" />
 				<simple name="path" value="" />
 			</element>
@@ -61,7 +63,7 @@
 			</element>
 			<element>
 				<simple name="id"
-					value="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.include.paths" />
+					value="ilg.gnuarmeclipse.managedbuild.cross.option.*.compiler.include.paths" />
 				<simple-array name="values">
 					<element value="$(apiDir)/include" />
 				</simple-array>
@@ -69,12 +71,13 @@
 			</element>
 		</complex-array>
 	</process>
+
 	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSBooleanOptionValue">
 			<simple name="projectName" value="$(projectName)" />
 			<complex-array name="resourcePaths">
 				<element>
 					<simple name="id"
-						value="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.strip" />
+						value="ilg.gnuarmeclipse.managedbuild.cross.option.*.linker.strip" />
 					<simple name="value" value="true" />
 					<simple name="path" value="" />
 				</element>
@@ -85,7 +88,7 @@
 		<complex-array name="resourcePaths">
 			<element>
 				<simple name="id"
-					value="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.libs" />
+					value="ilg.gnuarmeclipse.managedbuild.cross.option.*.linker.libs" />
 				<simple-array name="values">
 					<element value="ev3api" />
 					<element value="m" />
@@ -94,7 +97,7 @@
 			</element>
 			<element>
 				<simple name="id"
-					value="ilg.gnuarmeclipse.managedbuild.cross.option.c.linker.paths" />
+					value="ilg.gnuarmeclipse.managedbuild.cross.option.*.linker.paths" />
 				<simple-array name="values">
 					<element value="$(apiDir)/lib" />
 				</simple-array>
@@ -103,26 +106,48 @@
 		</complex-array>
 	</process>
 
+
 	<process type="org.eclipse.cdt.core.CreateSourceFolder">
 		<simple name="projectName" value="$(projectName)" />
 		<simple name="path" value="$(sourceDir)" />
-	</process>
-
-	<process type="org.eclipse.cdt.core.CreateFolder">
-		<simple name="projectName" value="$(projectName)" />
-		<simple name="path" value="myapps" />
 	</process>
 
 	<process type="org.eclipse.cdt.core.AddFiles">
 		<simple name="projectName" value="$(projectName)" />
 		<complex-array name="files">
 			<element>
-				<simple name="source" value="src/Basename.c" />
-				<simple name="target" value="$(sourceDir)/$(projectName).c" />
+				<simple name="source" value="src/Basename.cpp" />
+				<simple name="target" value="$(sourceDir)/$(projectName).cpp" />
 				<simple name="replaceable" value="true" />
 			</element>
 		</complex-array>
 	</process>
+
+	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
+		<simple name="projectName" value="$(projectName)" />
+		<complex-array name="resourcePaths">
+			<element>
+				<simple name="id"
+					value="ilg.gnuarmeclipse.managedbuild.cross.option.*.linker.other" />
+					<!-- starting with GCC 4.5 -->
+				<simple name="value" value="-static-libstdc++" />
+				<simple name="path" value="" />
+			</element>
+			<element>
+				<simple name="id"
+					value="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.otheroptimizations" />
+				<simple name="value" value="-std=c++17" />
+				<simple name="path" value="" />
+			</element>			
+		</complex-array>
+	</process>
+
+	<process type="org.eclipse.cdt.core.CreateFolder">
+		<simple name="projectName" value="$(projectName)" />
+		<simple name="path" value="myapps" />
+	</process>
+	
+
 	<process type="org.eclipse.cdt.core.AddFiles">
 		<simple name="projectName" value="$(projectName)" />
 		<complex-array name="files">
@@ -133,11 +158,12 @@
 			</element>
 		</complex-array>
 	</process>
+
 	<process type="org.eclipse.cdt.ui.OpenFiles">
 		<simple name="projectName" value="$(projectName)" />
 		<complex-array name="files">
 			<element>
-				<simple name="target" value="$(sourceDir)/$(projectName).c" />
+				<simple name="target" value="$(sourceDir)/$(projectName).cpp" />
 			</element>
 		</complex-array>
 	</process>
