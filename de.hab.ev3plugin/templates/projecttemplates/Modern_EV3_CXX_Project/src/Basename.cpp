@@ -16,6 +16,8 @@
 #include <Motor.h> // для моторов
 
 // точка запуска программы
+// программа реализует движение по линии по двум датчикам
+// предполагается использование больших моторов с направлением движения вперёд
 int main()
 {
 	// создаём экземпляр EV3 для работы с блоком
@@ -32,7 +34,7 @@ int main()
 	auto motorA = ev3->getMotor(ev3::Motor::Port::A);
 	auto motorB = ev3->getMotor(ev3::Motor::Port::B);
 
-	// получаем затчики цвета, подключенные к портам 1 и 2
+	// получаем датчики цвета, подключенные к портам 1 и 2
 	auto light1 = ev3->getSensor(ev3::Sensor::Port::P1, ev3::Sensor::Mode::COLOR_REFLECT);
 	auto light2 = ev3->getSensor(ev3::Sensor::Port::P2, ev3::Sensor::Mode::COLOR_REFLECT);
 
@@ -45,13 +47,14 @@ int main()
 
 	// устанавливаем правила для обновления скорости моторов
 	// пересчёт значений будет происходить автоматически при обновлении выходов в EV3
-	motorA->setSpeed(50 + pd.getPower());
-	motorB->setSpeed(50 - pd.getPower());
+	motorA->setPower(50.0f + pd.getPower());
+	motorB->setPower(50.0f - pd.getPower());
 
 	// запускаем основной цикл. Он выполняется синхронно, пока лямбда внутри него не вернёт false
 	// показания датчиков и выходы на моторы обновляются автоматически, поэтому нам остаётся только
 	// обновить ПД-регулятор
 	ev3->runLoop([&](float timestamp) -> bool {
+
 		pd.update(timestamp);
 
 		// останавливаемся, когда прошло 10 секунд от старта
