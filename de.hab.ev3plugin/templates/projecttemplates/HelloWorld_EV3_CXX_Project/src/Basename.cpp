@@ -15,7 +15,7 @@ int main()
 
   std::string greeting("Hello World!");
 
-  ev3->lcdPrintf(ev3::EV3::Color::BLACK, "%s\n", greeting.c_str());
+  ev3->lcdPrintf(ev3::Color::BLACK, "%s\n", greeting.c_str());
   ev3->wait(2);
 
   delete ev3;

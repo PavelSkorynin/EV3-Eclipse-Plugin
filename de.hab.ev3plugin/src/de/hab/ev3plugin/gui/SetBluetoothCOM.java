@@ -8,6 +8,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
@@ -16,6 +17,11 @@ import org.eclipse.swt.events.SelectionEvent;
 
 public class SetBluetoothCOM extends TitleAreaDialog {
 	private static final int SET_ID = IDialogConstants.CLIENT_ID + 1;
+
+	public static final int DPI_CURRENT = Display.getDefault().getDPI().x;
+	public static final float DPI_DEFAULT = 96.0f;
+	public static final float DPI_SCALE = DPI_CURRENT / DPI_DEFAULT;
+			
 	public interface Handler {
 		void setValue(String name);
 	}
@@ -50,7 +56,7 @@ public class SetBluetoothCOM extends TitleAreaDialog {
 		txtCom = new Text(container, SWT.BORDER);
 		txtCom.setTextDirection(0);
 		txtCom.setText(startVal);
-		txtCom.setBounds(29, 10, 283, 19);
+		txtCom.setBounds((int)(29 * DPI_SCALE), (int)(10 * DPI_SCALE), (int)(283 * DPI_SCALE), (int)(19 * DPI_SCALE));
 
 		return area;
 	}
@@ -81,7 +87,12 @@ public class SetBluetoothCOM extends TitleAreaDialog {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(341, 179);
+		return new Point((int)(341 * DPI_SCALE), (int)(179 * DPI_SCALE));
+	}
+	
+	@Override
+	protected boolean isResizable() {
+		return true;
 	}
 	/**
 	 * Set InputText value

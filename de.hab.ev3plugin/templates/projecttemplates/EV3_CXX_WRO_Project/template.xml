@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template type="ProjTempl" version="1.0" supplier="Eclipse.org"
+	revision="1.0" author="Pavel Skorynin"
+	copyright="Copyright (c) 2019"
+	id="EV3_CXX_WRO_Project" label="%EV3WRO.CCtemplate.label"
+	description="%EV3WRO.CCtemplate.description" help="help.html">
+	<!-- based on a template by Bala Torati (Symbian). Copyright (c) 2007 Symbian 
+		Software Limited and others. -->
+
+	<property-group id="basics" label="%EV3WRO.basics.label"
+		description="%EV3WRO.basics.description" type="PAGES-ONLY" help="help.html">
+		<property id="apiDir" label="%EV3Project.apiDir.label"
+			description="%EV3Project.apiDir.description" type="browsedir"
+			pattern=".*" default="%EV3Project.apiDir.default" hidden="false"
+			persist="true" />
+
+		<property id="uploadDir" label="%EV3Project.uploadDir.label"
+			description="%EV3Project.uploadDir.description" type="select"
+			pattern=".*" default="${brick}" hidden="false" persist="true">
+			<item value="${card}" label="SD-Card">
+			</item>
+			<item value="${brick}" label="Brick Internal Storage">
+			</item>
+			<item value="${usb}" label="Usb Stick">
+			</item>
+		</property>
+		<property id="sourceDir" label="%EV3WRO.sourceDir.label"
+			description="%EV3WRO.sourceDir.description" type="input"
+			default="%EV3WRO.sourceDir.default" pattern="[a-zA-Z0-9]+"
+			mandatory="false" persist="true" />
+
+	</property-group>
+	
+
+	<process type="org.eclipse.cdt.managedbuilder.core.NewManagedProject">
+		<simple name="name" value="$(projectName)" />
+		<simple name="artifactExtension" value="" />
+		<simple name="isCProject" value="false" />
+	</process>
+
+	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSBooleanOptionValue">
+		<simple name="projectName" value="$(projectName)" />
+		<complex-array name="resourcePaths">
+			<element>
+				<simple name="id"
+					value="ilg.gnuarmeclipse.managedbuild.cross.option.*.linker.strip" />
+				<simple name="value" value="true" />
+				<simple name="path" value="" />
+			</element>
+		</complex-array>
+	</process>
+	<process
+		type="org.eclipse.cdt.managedbuilder.core.AppendToMBSStringListOptionValues">
+		<simple name="projectName" value="$(projectName)" />
+		<complex-array name="resourcePaths">
+			<element>
+				<simple name="id"
+					value="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths" />
+				<simple-array name="values">
+					<element value="$(apiDir)/include" />
+				</simple-array>
+				<simple name="path" value="" />
+			</element>
+			<element>
+				<simple name="id"
+					value="ilg.gnuarmeclipse.managedbuild.cross.option.*.compiler.include.paths" />
+				<simple-array name="values">
+					<element value="$(apiDir)/include" />
+				</simple-array>
+				<simple name="path" value="" />
+			</element>
+		</complex-array>
+	</process>
+
+	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSBooleanOptionValue">
+			<simple name="projectName" value="$(projectName)" />
+			<complex-array name="resourcePaths">
+				<element>
+					<simple name="id"
+						value="ilg.gnuarmeclipse.managedbuild.cross.option.*.linker.strip" />
+					<simple name="value" value="true" />
+					<simple name="path" value="" />
+				</element>
+			</complex-array>
+	</process>
+ 		<process type="org.eclipse.cdt.managedbuilder.core.AppendToMBSStringListOptionValues">
+		<simple name="projectName" value="$(projectName)" />		
+		<complex-array name="resourcePaths">
+			<element>
+				<simple name="id"
+					value="ilg.gnuarmeclipse.managedbuild.cross.option.*.linker.libs" />
+				<simple-array name="values">
+					<element value="ev3api" />
+					<element value="m" />
+				</simple-array>
+				<simple name="path" value="" />
+			</element>
+			<element>
+				<simple name="id"
+					value="ilg.gnuarmeclipse.managedbuild.cross.option.*.linker.paths" />
+				<simple-array name="values">
+					<element value="$(apiDir)/lib" />
+				</simple-array>
+				<simple name="path" value="" />
+			</element>
+		</complex-array>
+	</process>
+
+
+	<process type="org.eclipse.cdt.core.CreateSourceFolder">
+		<simple name="projectName" value="$(projectName)" />
+		<simple name="path" value="$(sourceDir)" />
+	</process>
+
+	<process type="org.eclipse.cdt.core.AddFiles">
+		<simple name="projectName" value="$(projectName)" />
+		<complex-array name="files">
+			<element>
+				<simple name="source" value="src/Basename.cpp" />
+				<simple name="target" value="$(sourceDir)/$(projectName).cpp" />
+				<simple name="replaceable" value="true" />
+			</element>
+			<element>
+				<simple name="source" value="src/move.cpp" />
+				<simple name="target" value="$(sourceDir)/move.cpp" />
+				<simple name="replaceable" value="true" />
+			</element>
+			<element>
+				<simple name="source" value="src/move.hpp" />
+				<simple name="target" value="$(sourceDir)/move.hpp" />
+				<simple name="replaceable" value="true" />
+			</element>
+		</complex-array>
+	</process>
+
+	<process type="org.eclipse.cdt.managedbuilder.core.SetMBSStringOptionValue">
+		<simple name="projectName" value="$(projectName)" />
+		<complex-array name="resourcePaths">
+			<element>
+				<simple name="id"
+					value="ilg.gnuarmeclipse.managedbuild.cross.option.*.linker.other" />
+					<!-- starting with GCC 4.5 -->
+				<simple name="value" value="-static-libstdc++" />
+				<simple name="path" value="" />
+			</element>
+			<element>
+				<simple name="id"
+					value="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.otheroptimizations" />
+				<simple name="value" value="-std=c++17" />
+				<simple name="path" value="" />
+			</element>			
+		</complex-array>
+	</process>
+
+	<process type="org.eclipse.cdt.core.CreateFolder">
+		<simple name="projectName" value="$(projectName)" />
+		<simple name="path" value="myapps" />
+	</process>
+	
+
+	<process type="org.eclipse.cdt.core.AddFiles">
+		<simple name="projectName" value="$(projectName)" />
+		<complex-array name="files">
+			<element>
+				<simple name="source" value="start.lms" />
+				<simple name="target" value="start.lms" />
+				<simple name="replaceable" value="true" />
+			</element>
+		</complex-array>
+	</process>
+
+	<process type="org.eclipse.cdt.ui.OpenFiles">
+		<simple name="projectName" value="$(projectName)" />
+		<complex-array name="files">
+			<element>
+				<simple name="target" value="$(sourceDir)/$(projectName).cpp" />
+			</element>
+		</complex-array>
+	</process>
+
+</template>
+

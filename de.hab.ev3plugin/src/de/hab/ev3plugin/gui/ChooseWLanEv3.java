@@ -8,6 +8,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
@@ -23,6 +24,10 @@ public class ChooseWLanEv3 extends TitleAreaDialog {
 		void atCancel();
 	}
 	private static final int CONNECT_ID = IDialogConstants.CLIENT_ID + 1;
+
+	public static final int DPI_CURRENT = Display.getDefault().getDPI().x;
+	public static final float DPI_DEFAULT = 96.0f;
+	public static final float DPI_SCALE = DPI_CURRENT / DPI_DEFAULT;
 			
 	private Text txtNull;
 	private Handler handler = null;
@@ -52,7 +57,7 @@ public class ChooseWLanEv3 extends TitleAreaDialog {
 
 		txtNull = new Text(container, SWT.BORDER);
 		txtNull.setFont(SWTResourceManager.getFont(".Helvetica Neue DeskInterface", 20, SWT.NORMAL));
-		txtNull.setBounds(10, 10, 272, 29);
+		txtNull.setBounds((int)(10 * DPI_SCALE), (int)(10 * DPI_SCALE), (int)(272 * DPI_SCALE), (int)(29 * DPI_SCALE));
 		
 		Button btnNewButton = new Button(container, SWT.NONE);
 		btnNewButton.setFont(SWTResourceManager.getFont(".Helvetica Neue DeskInterface", 13, SWT.NORMAL));
@@ -64,7 +69,7 @@ public class ChooseWLanEv3 extends TitleAreaDialog {
 					txtNull.setText(serial);;
 			}
 		});
-		btnNewButton.setBounds(288, 8, 162, 34);
+		btnNewButton.setBounds((int)(288 * DPI_SCALE), (int)(8 * DPI_SCALE), (int)(162 * DPI_SCALE), (int)(34 * DPI_SCALE));
 		btnNewButton.setText("Fetch serial over USB");
 
 		return area;
@@ -104,6 +109,11 @@ public class ChooseWLanEv3 extends TitleAreaDialog {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(460, 190);
+		return new Point((int)(460 * DPI_SCALE), (int)(190 * DPI_SCALE));
+	}
+	
+	@Override
+	protected boolean isResizable() {
+		return true;
 	}
 }

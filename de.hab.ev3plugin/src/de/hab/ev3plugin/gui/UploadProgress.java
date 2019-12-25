@@ -17,6 +17,7 @@ import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -27,6 +28,10 @@ public class UploadProgress extends TitleAreaDialog {
 	private Text text;
 	private ProgressBar progressBar;
 
+	public static final int DPI_CURRENT = Display.getDefault().getDPI().x;
+	public static final float DPI_DEFAULT = 96.0f;
+	public static final float DPI_SCALE = DPI_CURRENT / DPI_DEFAULT;
+			
 	/**
 	 * Create the dialog.
 	 * 
@@ -57,7 +62,7 @@ public class UploadProgress extends TitleAreaDialog {
 
 		progressBar = new ProgressBar(container, SWT.HORIZONTAL);
 		// progressBar.setState(SWT.ERROR);
-		progressBar.setBounds(21, 10, 413, 34);
+		progressBar.setBounds((int)(21 * DPI_SCALE), (int)(10 * DPI_SCALE), (int)(413 * DPI_SCALE), (int)(34 * DPI_SCALE));
 		progressBar.setMinimum(0);
 		progressBar.setMaximum(100);
 		RowData rowData = new RowData();
@@ -66,7 +71,7 @@ public class UploadProgress extends TitleAreaDialog {
 		text = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.V_SCROLL
 				| SWT.MULTI);
 		text.setEditable(false);
-		text.setBounds(21, 50, 413, 95);
+		text.setBounds((int)(21 * DPI_SCALE), (int)(50 * DPI_SCALE), (int)(413 * DPI_SCALE), (int)(95 * DPI_SCALE));
 		return area;
 	}
 
@@ -91,7 +96,12 @@ public class UploadProgress extends TitleAreaDialog {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(450, 300);
+		return new Point((int)(450 * DPI_SCALE), (int)(300 * DPI_SCALE));
+	}
+	
+	@Override
+	protected boolean isResizable() {
+		return true;
 	}
 
 	public void setProgress(int percentage, String status) {

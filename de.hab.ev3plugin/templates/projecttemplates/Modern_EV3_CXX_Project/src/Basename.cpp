@@ -26,7 +26,7 @@ int main()
 
 	// отображаем приветственное сообщение на экране
 	std::string greeting("Modern EV3 Hello World!");
-	ev3->lcdPrintf(ev3::EV3::Color::BLACK, "%s\n", greeting.c_str());
+	ev3->lcdPrintf(ev3::Color::BLACK, "%s\n", greeting.c_str());
 	// ждём одну секунду
 	ev3->wait(1);
 
