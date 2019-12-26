@@ -10,9 +10,9 @@
 #include "move.hpp"
 
 const int RED_COLOR = 0;
-const int YELLOW_COLOR = 0;
-const int GREEN_COLOR = 0;
-const int BLUE_COLOR = 0;
+const int YELLOW_COLOR = 1;
+const int GREEN_COLOR = 2;
+const int BLUE_COLOR = 3;
 
 int colors[4];
 
