@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="API" default="copy">
+    <target name="copy">
+        <delete dir="templates/projecttemplates/EV3_CXX_WRO_Project/API"/>
+		<copy todir="templates/projecttemplates/EV3_CXX_WRO_Project/API/lib" >  
+		    <fileset dir="../deps/ev3api/API/out/lib" includes="**"/>  
+		</copy> 
+		<copy todir="templates/projecttemplates/EV3_CXX_WRO_Project/API/include" >  
+		    <fileset dir="../deps/ev3api/API/out/include" includes="**"/>  
+		</copy> 
+    </target>
+    <target name="clean">
+        <delete dir="templates/projecttemplates/EV3_CXX_WRO_Project/API"/>
+    </target>
+</project>

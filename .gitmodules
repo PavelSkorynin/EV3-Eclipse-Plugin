@@ -1,0 +1,3 @@
+[submodule "deps/ev3api"]
+	path = deps/ev3api
+	url = https://github.com/PavelSkorynin/EV3-API.git

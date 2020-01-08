@@ -9,10 +9,6 @@
 
 	<property-group id="basics" label="%EV3WRO.basics.label"
 		description="%EV3WRO.basics.description" type="PAGES-ONLY" help="help.html">
-		<property id="apiDir" label="%EV3Project.apiDir.label"
-			description="%EV3Project.apiDir.description" type="browsedir"
-			pattern=".*" default="%EV3Project.apiDir.default" hidden="false"
-			persist="true" />
 
 		<property id="uploadDir" label="%EV3Project.uploadDir.label"
 			description="%EV3Project.uploadDir.description" type="select"
@@ -57,7 +53,7 @@
 				<simple name="id"
 					value="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.include.paths" />
 				<simple-array name="values">
-					<element value="$(apiDir)/include" />
+					<element value="${ProjDirPath}/API/include" />
 				</simple-array>
 				<simple name="path" value="" />
 			</element>
@@ -65,7 +61,7 @@
 				<simple name="id"
 					value="ilg.gnuarmeclipse.managedbuild.cross.option.*.compiler.include.paths" />
 				<simple-array name="values">
-					<element value="$(apiDir)/include" />
+					<element value="${ProjDirPath}/API/include" />
 				</simple-array>
 				<simple name="path" value="" />
 			</element>
@@ -99,7 +95,7 @@
 				<simple name="id"
 					value="ilg.gnuarmeclipse.managedbuild.cross.option.*.linker.paths" />
 				<simple-array name="values">
-					<element value="$(apiDir)/lib" />
+					<element value="${ProjDirPath}/API/lib" />
 				</simple-array>
 				<simple name="path" value="" />
 			</element>
@@ -120,15 +116,15 @@
 				<simple name="target" value="$(sourceDir)/$(projectName).cpp" />
 				<simple name="replaceable" value="true" />
 			</element>
+		</complex-array>
+	</process>
+
+	<process type="de.h-ab.ev3plugin.CopyFolder">
+		<simple name="projectName" value="$(projectName)" />
+		<complex-array name="dirs">
 			<element>
-				<simple name="source" value="src/move.cpp" />
-				<simple name="target" value="$(sourceDir)/move.cpp" />
-				<simple name="replaceable" value="true" />
-			</element>
-			<element>
-				<simple name="source" value="src/move.hpp" />
-				<simple name="target" value="$(sourceDir)/move.hpp" />
-				<simple name="replaceable" value="true" />
+				<simple name="source" value="API" />
+				<simple name="target" value="API" />
 			</element>
 		</complex-array>
 	</process>
@@ -147,6 +143,12 @@
 				<simple name="id"
 					value="ilg.gnuarmeclipse.managedbuild.cross.option.cpp.compiler.otheroptimizations" />
 				<simple name="value" value="-std=c++17" />
+				<simple name="path" value="" />
+			</element>			
+			<element>
+				<simple name="id"
+					value="ilg.gnuarmeclipse.managedbuild.cross.option.optimization.level" />
+				<simple name="value" value="ilg.gnuarmeclipse.managedbuild.cross.option.optimization.level.most" />
 				<simple name="path" value="" />
 			</element>			
 		</complex-array>

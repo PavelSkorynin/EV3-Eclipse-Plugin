@@ -3936,20 +3936,6 @@
             isTest="false">                                  
 	     <configuration
             artifactExtension="elf"
-            buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-            cleanCommand="${cross_rm} -rf"
-            id="ilg.gnuarmeclipse.managedbuild.cross.config.elf.debug"
-            name="Debug"
-            parent="cdt.managedbuild.config.gnu.base">
-	           <toolChain
-                  id="ilg.gnuarmeclipse.managedbuild.cross.toolchain.elf.debug"
-                  secondaryOutputs="ilg.gnuarmeclipse.managedbuild.cross.createflash.output;ilg.gnuarmeclipse.managedbuild.cross.createlisting.output;ilg.gnuarmeclipse.managedbuild.cross.printsize.output"
-                  superClass="ilg.gnuarmeclipse.managedbuild.cross.toolchain.base"
-                  targetTool="ilg.gnuarmeclipse.managedbuild.cross.tool.c.linker;ilg.gnuarmeclipse.managedbuild.cross.tool.cpp.linker">
-	           </toolChain>                                   
-	     </configuration>
-	     <configuration
-            artifactExtension="elf"
             buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
             cleanCommand="${cross_rm} -rf"
             id="ilg.gnuarmeclipse.managedbuild.cross.config.elf.release"
@@ -3971,17 +3957,6 @@
 	        isTest="false"
 	        >            
 	     <configuration
-	           name="Debug"
-	           cleanCommand="${cross_rm} -rf"
-	           parent="cdt.managedbuild.config.gnu.base"
-	           buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-	           id="ilg.gnuarmeclipse.managedbuild.cross.config.so.debug">
-	           <toolChain
-	                 superClass="ilg.gnuarmeclipse.managedbuild.cross.toolchain.base"
-	                 id="ilg.gnuarmeclipse.managedbuild.cross.toolchain.so.debug">
-	           </toolChain>                                                     
-	     </configuration>
-	     <configuration
 	           name="Release"
 	           cleanCommand="${cross_rm} -rf"
 	           parent="cdt.managedbuild.config.gnu.base"
@@ -4000,17 +3975,6 @@
 	        isAbstract="false"
 	        isTest="false"
 	        >            
-	     <configuration
-	           name="Debug"
-	           parent="cdt.managedbuild.config.gnu.base"
-	           buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
-	           cleanCommand="${cross_rm} -rf"
-	           id="ilg.gnuarmeclipse.managedbuild.cross.config.lib.debug">
-	           <toolChain
-	                 superClass="ilg.gnuarmeclipse.managedbuild.cross.toolchain.base"
-	                 id="ilg.gnuarmeclipse.managedbuild.cross.toolchain.lib.debug">
-	           </toolChain>                                                                                				               				  
-	     </configuration>
 	     <configuration
 	           name="Release"
 	           parent="cdt.managedbuild.config.gnu.base"
@@ -4124,6 +4088,20 @@
             parent="org.eclipse.cdt.managedbuilder.ui.properties.Page_BuildSettings"
             weight="012">
       </tab>
+   </extension>
+   <extension
+         point="org.eclipse.cdt.core.templateProcessTypes">
+		<processType
+            name="CopyFolder"
+            processRunner="org.eclipse.cdt.core.templateengine.process.processes.CopyFolder">
+         <simple name="projectName"/>
+         <complexArray name="dirs">
+            <baseType>
+               <simple name="source"/>
+               <simple name="target"/>
+            </baseType>
+         </complexArray>
+      </processType>
    </extension>
            
 </plugin>
