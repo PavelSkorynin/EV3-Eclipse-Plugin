@@ -67,7 +67,7 @@ public class UploadOnEV3 implements IWorkbenchWindowActionDelegate {
 			projectName = proj.getName();
 			buildInfo = ManagedBuildManager.getBuildInfo(proj);
 			
-			binaryDir = buildInfo.getDefaultConfiguration().getName();
+			binaryDir = buildInfo.getConfigurationName();
 			workspaceRoot = ResourcesPlugin.getWorkspace().getRoot()
 					.getLocation().toString(); // get location of workspace
 

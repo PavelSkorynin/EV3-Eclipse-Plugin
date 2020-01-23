@@ -70,9 +70,12 @@ public class Ev3Duder { // wrapper for the ev3dude CLI program
 			if (ev3duder.getStatus() != 0)
 				MessageDialog.openError(shell,
 						"Error uploading (code=" + ev3duder.getStatus() + ")",
-						ev3duder.getInfos() != null ?
+						"path: " + path + "\n" +
+						"local: " + local + "\n" +
+						"remote: " + remote + "\n" +
+						(ev3duder.getInfos() != null ?
 							ev3duder.getInfos() :
-							"An unknown error occured... Sorry about that."
+							"An unknown error occured... Sorry about that.")
 						);
 		}
 		return ev3duder.getStatus() == 0;
